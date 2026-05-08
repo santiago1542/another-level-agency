@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio — Another Level Agency</title>
+  <meta name="description" content="Performance reports and brand work for restaurant and hospitality clients across the United States." />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* ─── Filter Bar ─── */
+    .filter-bar {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 3rem;
+      flex-wrap: wrap;
+    }
+    .filter-btn {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      padding: 0.5rem 1.25rem;
+      cursor: pointer;
+      background: transparent;
+      font-family: var(--font-body);
+      transition: all 0.3s ease;
+    }
+    .filter-btn:hover { color: var(--cream); border-color: var(--border-accent); }
+    .filter-btn.active {
+      background: var(--gold);
+      color: var(--bg);
+      border-color: var(--gold);
+    }
+
+    /* ─── Portfolio Grid ─── */
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+    }
+    .portfolio-grid .portfolio-card--large {
+      grid-column: span 2;
+    }
+
+    /* Card color palettes */
+    .bg-terracotta { background: linear-gradient(145deg, #150A04 0%, #2E1508 35%, #4A2210 65%, #5E2E14 100%); }
+    .bg-forest     { background: linear-gradient(145deg, #081210 0%, #122820 35%, #1C3A28 65%, #224030 100%); }
+    .bg-navy       { background: linear-gradient(145deg, #07111C 0%, #0F2035 35%, #163050 65%, #1A3860 100%); }
+    .bg-amber      { background: linear-gradient(145deg, #140C02 0%, #2A1A06 35%, #40280A 65%, #522E0C 100%); }
+    .bg-plum       { background: linear-gradient(145deg, #120A1C 0%, #221535 35%, #302050 65%, #3A2860 100%); }
+    .bg-teal       { background: linear-gradient(145deg, #061414 0%, #0E2828 35%, #163838 65%, #1A4040 100%); }
+    .bg-burgundy   { background: linear-gradient(145deg, #140606 0%, #281010 35%, #3A1818 65%, #4A2020 100%); }
+    .bg-olive      { background: linear-gradient(145deg, #101206 0%, #1E2410 35%, #2C3618 65%, #344020 100%); }
+
+    /* Decorative shape on cards */
+    .portfolio-card__bg::before {
+      content: '';
+      position: absolute;
+      bottom: -30%;
+      right: -15%;
+      width: 60%;
+      height: 90%;
+      border-radius: 50%;
+      border: 1px solid rgba(196,164,106,0.12);
+      pointer-events: none;
+    }
+    .portfolio-card__bg::after {
+      content: '';
+      position: absolute;
+      top: 15%;
+      left: 15%;
+      width: 35%;
+      height: 55%;
+      border-radius: 50%;
+      border: 1px solid rgba(196,164,106,0.07);
+      pointer-events: none;
+    }
+
+    /* ─── Performance Report Strip ─── */
+    .report-strip {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      margin-top: 1.25rem;
+    }
+    .report-cell {
+      background: var(--surface);
+      padding: 1.75rem 1.5rem;
+      transition: background 0.3s ease;
+    }
+    .report-cell:hover { background: var(--elevated); }
+    .report-cell__val {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-weight: 500;
+      color: var(--gold);
+      line-height: 1;
+      margin-bottom: 0.4rem;
+    }
+    .report-cell__label {
+      font-size: 0.75rem;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+    }
+
+    /* ─── Platform Breakdown ─── */
+    .platform-row {
+      display: flex;
+      align-items: center;
+      padding: 1.375rem 0;
+      border-bottom: 1px solid var(--border);
+      gap: 1.5rem;
+    }
+    .platform-row:first-child { border-top: 1px solid var(--border); }
+    .platform-row__name {
+      width: 180px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      flex-shrink: 0;
+    }
+    .platform-row__bar-wrap {
+      flex: 1;
+      height: 3px;
+      background: var(--elevated);
+      position: relative;
+    }
+    .platform-row__bar {
+      position: absolute;
+      inset: 0;
+      right: auto;
+      background: var(--gold);
+      transition: width 1.2s var(--ease-expo);
+      width: 0;
+    }
+    .platform-row__bar.animated { width: var(--w); }
+    .platform-row__pct {
+      font-family: var(--font-display);
+      font-size: 1.125rem;
+      font-weight: 500;
+      color: var(--gold);
+      width: 60px;
+      text-align: right;
+      flex-shrink: 0;
+    }
+    .platform-row__desc {
+      font-size: 0.78rem;
+      color: var(--muted);
+      width: 200px;
+      text-align: right;
+      flex-shrink: 0;
+    }
+
+    @media (max-width: 1024px) {
+      .portfolio-grid { grid-template-columns: 1fr 1fr; }
+      .portfolio-grid .portfolio-card--large { grid-column: span 2; }
+      .report-strip { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 768px) {
+      .portfolio-grid { grid-template-columns: 1fr; }
+      .portfolio-grid .portfolio-card--large { grid-column: span 1; }
+      .report-strip { grid-template-columns: 1fr 1fr; }
+      .platform-row__desc { display: none; }
+      .platform-row__name { width: 130px; }
+    }
+    @media (max-width: 480px) {
+      .report-strip { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Nav -->
+<nav class="nav">
+  <div class="nav__inner">
+    <a href="index.html" class="nav__logo">Another <em>Level</em></a>
+    <ul class="nav__links">
+      <li><a href="services.html">Services</a></li>
+      <li><a href="portfolio.html" class="active">Portfolio</a></li>
+      <li><a href="success-cases.html">Success Cases</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <a href="contact.html" class="nav__cta">Book a Call →</a>
+    <button class="nav__toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="mobile-nav">
+  <a href="index.html">Home</a>
+  <a href="services.html">Services</a>
+  <a href="portfolio.html">Portfolio</a>
+  <a href="success-cases.html">Success Cases</a>
+  <a href="contact.html">Contact</a>
+  <a href="contact.html" class="mobile-nav__cta btn">Book a Call</a>
+</div>
+
+<!-- Page Header -->
+<header class="page-header">
+  <div class="container">
+    <p class="page-header__eyebrow">Our Portfolio</p>
+    <h1 class="page-header__title">
+      Real Brands.<br>
+      <em>Real Numbers.</em>
+    </h1>
+    <p class="page-header__sub">Every project below is backed by performance data. Hover any card to see the metrics that matter to your bottom line.</p>
+  </div>
+</header>
+
+<!-- Filter + Grid -->
+<section class="section">
+  <div class="container">
+    <div class="filter-bar reveal">
+      <button class="filter-btn active" data-filter="all">All Work</button>
+      <button class="filter-btn" data-filter="restaurant">Restaurants</button>
+      <button class="filter-btn" data-filter="cafe">Cafes &amp; Bars</button>
+      <button class="filter-btn" data-filter="hotel">Hotels &amp; Resorts</button>
+      <button class="filter-btn" data-filter="ghost">Ghost Kitchens</button>
+    </div>
+
+    <div class="portfolio-grid">
+      <!-- Card 1 — Large -->
+      <div class="portfolio-card portfolio-card--large reveal" data-category="restaurant">
+        <div class="portfolio-card__bg bg-terracotta"></div>
+        <div class="portfolio-card__overlay"></div>
+        <div class="portfolio-card__content">
+          <div class="portfolio-card__tag">Fine Dining · Miami, FL</div>
+          <div class="portfolio-card__title">El Fuego Restaurant</div>
+          <div class="portfolio-card__metrics">
+            <div><div class="pm__val">4.1x</div><div class="pm__lbl">ROAS</div></div>
+            <div><div class="pm__val">+218%</div><div class="pm__lbl">Delivery Orders</div></div>
+            <div><div class="pm__val">62K</div><div class="pm__lbl">New Followers</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="portfolio-card reveal" data-category="cafe">
+        <div class="portfolio-card__bg bg-forest"></div>
+        <div class="portfolio-card__overlay"></div>
+        <div class="portfolio-card__content">
+          <div class="portfolio-card__tag">Specialty Coffee · Portland, OR</div>
+          <div class="portfolio-card__title">Roots Coffee Co.</div>
+          <div class="portfolio-card__metrics">
+            <div><div class="pm__val">+340%</div><div class="pm__lbl">Instagram Growth</div></div>
+            <div><div class="pm__val">2.8x</div><div class="pm__lbl">Foot Traffic</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="portfolio-card reveal" data-category="hotel">
+        <div class="portfolio-card__bg bg-navy"></div>
+        <div class="portfolio-card__overlay"></div>
+        <div class="portfolio-card__content">
+          <div class="portfolio-card__tag">Boutique Hotel · New York, NY</div>
+          <div class="portfolio-card__title">The Linden House</div>
+          <div class="portfolio-card__metrics">
+            <div><div class="pm__val">+180%</div><div class="pm__lbl">Direct Bookings</div></div>
+            <div><div class="pm__val">4.8★</div><div class="pm__lbl">Avg. Rating</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="portfolio-card reveal" data-category="restaurant">
+        <div class="portfolio-card__bg bg-amber"></div>
+        <div class="portfolio-card__overlay"></div>
+        <div class="portfolio-card__content">
+          <div class="portfolio-card__tag">Casual Dining · Austin, TX</div>
+          <div class="portfolio-card__title">La Palma Kitchen</div>
+          <div class="portfolio-card__metrics">
+            <div><div class="pm__val">3.6x</div><div class="pm__lbl">ROAS</div></div>
+            <div><div class="pm__val">+89K</div><div class="pm__lbl">Monthly Reach</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 5 — Large -->
+      <div class="portfolio-card portfolio-card--large reveal" data-category="hotel">
+        <div class="portfolio-card__bg bg-teal"></div>
+        <div class="portfolio-card__overlay"></div>
+        <div class="portfolio-card__content">
+          <div class="portfolio-card__tag">Luxury Resort · Miami Beach, FL</div>
+          <div class="portfolio-card__title">Casa Blu Resort &amp; Spa</div>
+          <div class="portfolio-card__metrics">
+            <div><div class="pm__val">+192%</div><div class="pm__lbl">Instagram Bookings</div></div>
+            <div><div class="pm__val">5.2x</div><div class="pm__lbl">Ad ROAS</div></div>
+            <div><div class="pm__val">128K</div><div class="pm__lbl">Followers Gained</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 6 -->
+      <div class="portfolio-card reveal" data-category="ghost">
+        <div class="portfolio-card__bg bg-burgundy"></div>
+        <div class="portfolio-card__overlay"></div>
+        <div class="portfolio-card__content">
+          <div class="portfolio-card__tag">Ghost Kitchen · Chicago, IL</div>
+          <div class="portfolio-card__title">Wing Street Kitchen</div>
+          <div class="portfolio-card__metrics">
+            <div><div class="pm__val">#1</div><div class="pm__lbl">DoorDash Ranking</div></div>
+            <div><div class="pm__val">+310%</div><div class="pm__lbl">Weekly Orders</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 7 -->
+      <div class="portfolio-card reveal" data-category="cafe">
+        <div class="portfolio-card__bg bg-plum"></div>
+        <div class="portfolio-card__overlay"></div>
+        <div class="portfolio-card__content">
+          <div class="portfolio-card__tag">Cocktail Bar · Los Angeles, CA</div>
+          <div class="portfolio-card__title">The Ember Room</div>
+          <div class="portfolio-card__metrics">
+            <div><div class="pm__val">+156%</div><div class="pm__lbl">Event Revenue</div></div>
+            <div><div class="pm__val">44K</div><div class="pm__lbl">New Followers</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 8 -->
+      <div class="portfolio-card reveal" data-category="restaurant">
+        <div class="portfolio-card__bg bg-olive"></div>
+        <div class="portfolio-card__overlay"></div>
+        <div class="portfolio-card__content">
+          <div class="portfolio-card__tag">Farm-to-Table · Nashville, TN</div>
+          <div class="portfolio-card__title">Harvest &amp; Hearth</div>
+          <div class="portfolio-card__metrics">
+            <div><div class="pm__val">3.2x</div><div class="pm__lbl">ROAS</div></div>
+            <div><div class="pm__val">+74%</div><div class="pm__lbl">Catering Leads</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Aggregate Performance -->
+<section class="section" style="background:var(--surface); border-top:1px solid var(--border);">
+  <div class="container">
+    <p class="section-label reveal">Performance by the Numbers</p>
+    <h2 class="reveal" style="font-family:var(--font-display); font-size:clamp(2rem,3.5vw,3.5rem); font-weight:400; line-height:1.05; letter-spacing:-0.02em; margin-bottom:0.75rem;">
+      Across All Active Clients,<br>
+      <em style="font-style:italic; color:var(--gold);">Last 12 Months</em>
+    </h2>
+    <p class="reveal" style="font-size:0.875rem; color:var(--muted); margin-bottom:3rem;">Aggregated performance data from our full client roster, January – December 2024.</p>
+
+    <div class="report-strip reveal">
+      <div class="report-cell">
+        <div class="report-cell__val" data-counter data-target="4.2" data-suffix="M+" data-decimals="1">4.2M+</div>
+        <div class="report-cell__label">Total Monthly Reach Generated</div>
+      </div>
+      <div class="report-cell">
+        <div class="report-cell__val" data-counter data-target="3.8" data-suffix="x" data-decimals="1">3.8x</div>
+        <div class="report-cell__label">Average Return on Ad Spend</div>
+      </div>
+      <div class="report-cell">
+        <div class="report-cell__val" data-counter data-target="238" data-suffix="%">238%</div>
+        <div class="report-cell__label">Avg. Delivery Order Growth (90 days)</div>
+      </div>
+      <div class="report-cell">
+        <div class="report-cell__val" data-counter data-target="4.7" data-suffix="★" data-decimals="1">4.7★</div>
+        <div class="report-cell__label">Average Client Rating Improvement</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Revenue by Platform -->
+<section class="section">
+  <div class="container">
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:start;">
+      <div>
+        <p class="section-label reveal">Revenue Attribution</p>
+        <h2 class="reveal" style="font-family:var(--font-display); font-size:clamp(1.75rem,3vw,3rem); font-weight:400; line-height:1.05; letter-spacing:-0.02em; margin-bottom:1rem;">
+          Where the <em style="font-style:italic; color:var(--gold);">Orders Come From</em>
+        </h2>
+        <p class="reveal" style="font-size:0.875rem; color:var(--muted); line-height:1.75; margin-bottom:2.5rem;">Average revenue contribution by channel across our restaurant client base.</p>
+
+        <div class="reveal" id="platform-bars">
+          <div class="platform-row" data-w="72%">
+            <div class="platform-row__name">DoorDash</div>
+            <div class="platform-row__bar-wrap"><div class="platform-row__bar" style="--w:72%"></div></div>
+            <div class="platform-row__pct">72%</div>
+            <div class="platform-row__desc">Primary delivery channel</div>
+          </div>
+          <div class="platform-row" data-w="58%">
+            <div class="platform-row__name">Uber Eats</div>
+            <div class="platform-row__bar-wrap"><div class="platform-row__bar" style="--w:58%"></div></div>
+            <div class="platform-row__pct">58%</div>
+            <div class="platform-row__desc">Secondary delivery revenue</div>
+          </div>
+          <div class="platform-row" data-w="44%">
+            <div class="platform-row__name">Meta Ads</div>
+            <div class="platform-row__bar-wrap"><div class="platform-row__bar" style="--w:44%"></div></div>
+            <div class="platform-row__pct">44%</div>
+            <div class="platform-row__desc">Paid social conversion</div>
+          </div>
+          <div class="platform-row" data-w="35%">
+            <div class="platform-row__name">Google Ads</div>
+            <div class="platform-row__bar-wrap"><div class="platform-row__bar" style="--w:35%"></div></div>
+            <div class="platform-row__pct">35%</div>
+            <div class="platform-row__desc">Local search capture</div>
+          </div>
+          <div class="platform-row" data-w="28%">
+            <div class="platform-row__name">Instagram Organic</div>
+            <div class="platform-row__bar-wrap"><div class="platform-row__bar" style="--w:28%"></div></div>
+            <div class="platform-row__pct">28%</div>
+            <div class="platform-row__desc">Organic brand growth</div>
+          </div>
+          <div class="platform-row" data-w="18%">
+            <div class="platform-row__name">TikTok</div>
+            <div class="platform-row__bar-wrap"><div class="platform-row__bar" style="--w:18%"></div></div>
+            <div class="platform-row__pct">18%</div>
+            <div class="platform-row__desc">Emerging viral channel</div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <p class="section-label reveal">Industry Breakdown</p>
+        <h2 class="reveal" style="font-family:var(--font-display); font-size:clamp(1.75rem,3vw,3rem); font-weight:400; line-height:1.05; letter-spacing:-0.02em; margin-bottom:3rem;">
+          Our Client <em style="font-style:italic; color:var(--gold);">Mix</em>
+        </h2>
+        <div class="reveal">
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--border); border:1px solid var(--border);">
+            <div style="background:var(--surface); padding:2rem 1.75rem;">
+              <div style="font-family:var(--font-display); font-size:2.5rem; font-weight:500; color:var(--gold); line-height:1; margin-bottom:0.5rem;" data-counter data-target="58" data-suffix="%">58%</div>
+              <div style="font-size:0.875rem; color:var(--cream-dim); font-weight:500; margin-bottom:0.3rem;">Restaurants</div>
+              <div style="font-size:0.75rem; color:var(--muted);">Casual to fine dining</div>
+            </div>
+            <div style="background:var(--surface); padding:2rem 1.75rem;">
+              <div style="font-family:var(--font-display); font-size:2.5rem; font-weight:500; color:var(--gold); line-height:1; margin-bottom:0.5rem;" data-counter data-target="18" data-suffix="%">18%</div>
+              <div style="font-size:0.875rem; color:var(--cream-dim); font-weight:500; margin-bottom:0.3rem;">Hotels &amp; Resorts</div>
+              <div style="font-size:0.75rem; color:var(--muted);">Boutique to luxury</div>
+            </div>
+            <div style="background:var(--surface); padding:2rem 1.75rem; border-top:1px solid var(--border);">
+              <div style="font-family:var(--font-display); font-size:2.5rem; font-weight:500; color:var(--gold); line-height:1; margin-bottom:0.5rem;" data-counter data-target="14" data-suffix="%">14%</div>
+              <div style="font-size:0.875rem; color:var(--cream-dim); font-weight:500; margin-bottom:0.3rem;">Cafes &amp; Bars</div>
+              <div style="font-size:0.75rem; color:var(--muted);">Coffee, cocktail, wine</div>
+            </div>
+            <div style="background:var(--surface); padding:2rem 1.75rem; border-top:1px solid var(--border);">
+              <div style="font-family:var(--font-display); font-size:2.5rem; font-weight:500; color:var(--gold); line-height:1; margin-bottom:0.5rem;" data-counter data-target="10" data-suffix="%">10%</div>
+              <div style="font-size:0.875rem; color:var(--cream-dim); font-weight:500; margin-bottom:0.3rem;">Ghost Kitchens</div>
+              <div style="font-size:0.75rem; color:var(--muted);">Delivery-only brands</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" style="border-top:1px solid var(--border);">
+  <div class="container">
+    <p class="section-label reveal" style="justify-content:center;">Your Brand Next</p>
+    <h2 class="cta-section__title reveal">Want Results Like<br><em>These?</em></h2>
+    <p class="cta-section__sub reveal">Let's build a performance strategy tailored to your restaurant, hotel, or hospitality brand.</p>
+    <div class="cta-section__btns reveal">
+      <a href="contact.html" class="btn btn--primary">Book a Free Strategy Call <span class="btn__arrow"></span></a>
+      <a href="success-cases.html" class="btn btn--outline">Read Case Studies <span class="btn__arrow"></span></a>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__inner">
+      <div>
+        <div class="footer__brand">Another <em>Level</em></div>
+        <p class="footer__tagline">Premium marketing and visual branding for restaurant and hospitality brands across the United States.</p>
+      </div>
+      <div>
+        <div class="footer__col-title">Navigation</div>
+        <ul class="footer__links">
+          <li><a href="services.html">Services</a></li>
+          <li><a href="portfolio.html">Portfolio</a></li>
+          <li><a href="success-cases.html">Success Cases</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer__col-title">Services</div>
+        <ul class="footer__links">
+          <li><a href="services.html">Visual Branding</a></li>
+          <li><a href="services.html">Content Creation</a></li>
+          <li><a href="services.html">Platform Management</a></li>
+          <li><a href="services.html">Paid Ads</a></li>
+          <li><a href="services.html">Customer Relations</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer__col-title">Contact</div>
+        <ul class="footer__links">
+          <li><a href="mailto:hello@anotherlevelagency.com">hello@anotherlevelagency.com</a></li>
+          <li><a href="tel:+13055550100">(305) 555-0100</a></li>
+          <li><a href="https://instagram.com/anotherlevelagency" target="_blank" rel="noopener">Instagram</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span class="footer__copy">© 2025 Another Level Agency. All rights reserved.</span>
+      <div class="footer__social"><a href="https://instagram.com/anotherlevelagency" target="_blank" rel="noopener">Instagram</a></div>
+    </div>
+  </div>
+</footer>
+
+<script src="main.js"></script>
+<script>
+  // Animate bar chart on scroll
+  const barObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.querySelectorAll('.platform-row__bar').forEach((bar, i) => {
+          setTimeout(() => bar.classList.add('animated'), i * 120);
+        });
+        barObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.3 });
+  const barsSection = document.getElementById('platform-bars');
+  if (barsSection) barObserver.observe(barsSection);
+</script>
+</body>
+</html>

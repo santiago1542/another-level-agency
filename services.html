@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Services — Another Level Agency</title>
+  <meta name="description" content="Visual branding, high-end content creation, platform management, paid ads, and customer relations for restaurant and hospitality brands." />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* ─── Service Detail ─── */
+    .service-detail {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 5rem;
+      padding: 5rem 0;
+      border-bottom: 1px solid var(--border);
+      align-items: start;
+    }
+    .service-detail:first-child { padding-top: 0; }
+    .service-detail:last-child { border-bottom: none; }
+    .service-detail__aside {}
+    .service-detail__num {
+      font-family: var(--font-display);
+      font-size: 5rem;
+      font-weight: 300;
+      color: var(--faint);
+      line-height: 1;
+      margin-bottom: 1rem;
+      transition: color 0.4s ease;
+    }
+    .service-detail:hover .service-detail__num { color: var(--gold); }
+    .service-detail__icon {
+      width: 48px; height: 48px;
+      color: var(--gold);
+      margin-bottom: 1.25rem;
+    }
+    .service-detail__tag { margin-bottom: 0; }
+    .service-detail__body {}
+    .service-detail__title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 3.5vw, 3.25rem);
+      font-weight: 400;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.25rem;
+    }
+    .service-detail__title em { font-style: italic; color: var(--gold); }
+    .service-detail__desc {
+      font-size: 0.9375rem;
+      color: var(--muted);
+      line-height: 1.8;
+      margin-bottom: 2.5rem;
+      max-width: 600px;
+    }
+    .service-detail__deliverables {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.625rem;
+      margin-bottom: 2.5rem;
+    }
+    .deliverable {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.625rem;
+      font-size: 0.875rem;
+      color: var(--cream-dim);
+      line-height: 1.45;
+    }
+    .deliverable::before {
+      content: '◆';
+      color: var(--gold);
+      font-size: 0.45rem;
+      margin-top: 0.45rem;
+      flex-shrink: 0;
+    }
+
+    /* ─── Platforms ─── */
+    .platforms-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+    .platform-tile {
+      background: var(--surface);
+      padding: 2rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.875rem;
+      text-align: center;
+      transition: background 0.35s ease;
+    }
+    .platform-tile:hover { background: var(--elevated); }
+    .platform-tile__icon {
+      width: 44px; height: 44px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.375rem;
+    }
+    .platform-tile__name {
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--cream-dim);
+      letter-spacing: 0.04em;
+    }
+    .platform-tile__desc {
+      font-size: 0.72rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    /* ─── Responsive ─── */
+    @media (max-width: 1024px) {
+      .service-detail { grid-template-columns: 1fr; gap: 2rem; }
+      .service-detail__num { font-size: 3rem; }
+      .platforms-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (max-width: 768px) {
+      .service-detail__deliverables { grid-template-columns: 1fr; }
+      .platforms-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 480px) {
+      .platforms-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Nav -->
+<nav class="nav">
+  <div class="nav__inner">
+    <a href="index.html" class="nav__logo">Another <em>Level</em></a>
+    <ul class="nav__links">
+      <li><a href="services.html" class="active">Services</a></li>
+      <li><a href="portfolio.html">Portfolio</a></li>
+      <li><a href="success-cases.html">Success Cases</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <a href="contact.html" class="nav__cta">Book a Call →</a>
+    <button class="nav__toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="mobile-nav">
+  <a href="index.html">Home</a>
+  <a href="services.html">Services</a>
+  <a href="portfolio.html">Portfolio</a>
+  <a href="success-cases.html">Success Cases</a>
+  <a href="contact.html">Contact</a>
+  <a href="contact.html" class="mobile-nav__cta btn">Book a Call</a>
+</div>
+
+<!-- Page Header -->
+<header class="page-header">
+  <div class="container">
+    <p class="page-header__eyebrow">Our Services</p>
+    <h1 class="page-header__title">
+      Everything Your Brand<br>
+      Needs to <em>Dominate</em>
+    </h1>
+    <p class="page-header__sub">From visual identity to paid performance — we cover every touchpoint that turns curious guests into loyal regulars and delivery orders into daily revenue.</p>
+  </div>
+</header>
+
+<!-- Services Detail -->
+<section class="section">
+  <div class="container">
+
+    <!-- 01 Visual Branding -->
+    <div class="service-detail reveal">
+      <div class="service-detail__aside">
+        <div class="service-detail__num">01</div>
+        <svg class="service-detail__icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2">
+          <polygon points="24,4 42,15 42,33 24,44 6,33 6,15"/>
+          <polygon points="24,12 34,18 34,30 24,36 14,30 14,18" opacity="0.4"/>
+          <circle cx="24" cy="24" r="4"/>
+        </svg>
+        <span class="tag service-detail__tag">Brand Identity</span>
+      </div>
+      <div class="service-detail__body">
+        <h2 class="service-detail__title">Visual Brand <em>Identity</em></h2>
+        <p class="service-detail__desc">Your restaurant's visual identity is the silent ambassador that speaks before your food does. We build cohesive, compelling brand systems that command premium perception — from your logo to your menu to your social feed — ensuring every visual touchpoint communicates exactly the experience you deliver.</p>
+        <div class="service-detail__deliverables">
+          <div class="deliverable">Logo design &amp; brand mark system</div>
+          <div class="deliverable">Color palette &amp; typography guide</div>
+          <div class="deliverable">Brand standards &amp; usage guidelines</div>
+          <div class="deliverable">Menu design &amp; print collateral</div>
+          <div class="deliverable">Social media visual templates</div>
+          <div class="deliverable">Signage &amp; packaging direction</div>
+          <div class="deliverable">Brand voice &amp; tone guide</div>
+          <div class="deliverable">Competitive positioning analysis</div>
+        </div>
+        <a href="contact.html" class="btn btn--primary">Get a Quote <span class="btn__arrow"></span></a>
+      </div>
+    </div>
+
+    <!-- 02 Content Creation -->
+    <div class="service-detail reveal">
+      <div class="service-detail__aside">
+        <div class="service-detail__num">02</div>
+        <svg class="service-detail__icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2">
+          <rect x="4" y="8" width="40" height="32" rx="2"/>
+          <circle cx="24" cy="24" r="9"/>
+          <circle cx="24" cy="24" r="4"/>
+          <circle cx="37" cy="12" r="3"/>
+        </svg>
+        <span class="tag service-detail__tag">Content</span>
+      </div>
+      <div class="service-detail__body">
+        <h2 class="service-detail__title">High-End <em>Content Creation</em></h2>
+        <p class="service-detail__desc">Content is currency in the hospitality industry. We produce editorial-quality photography direction, cinematic video reels, and compelling copy that captures the atmosphere, craft, and personality of your establishment — content that earns shares, saves, and reservations.</p>
+        <div class="service-detail__deliverables">
+          <div class="deliverable">Monthly content calendar planning</div>
+          <div class="deliverable">Photography direction briefs</div>
+          <div class="deliverable">Short-form video (Reels, TikTok)</div>
+          <div class="deliverable">Story &amp; highlight templates</div>
+          <div class="deliverable">Copywriting for all captions</div>
+          <div class="deliverable">Hashtag &amp; SEO strategy</div>
+          <div class="deliverable">UGC curation &amp; management</div>
+          <div class="deliverable">Seasonal campaign content</div>
+        </div>
+        <a href="contact.html" class="btn btn--primary">Get a Quote <span class="btn__arrow"></span></a>
+      </div>
+    </div>
+
+    <!-- 03 Customer Relations -->
+    <div class="service-detail reveal">
+      <div class="service-detail__aside">
+        <div class="service-detail__num">03</div>
+        <svg class="service-detail__icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2">
+          <path d="M4 36 Q4 28 12 24 Q20 20 24 20 Q28 20 36 24 Q44 28 44 36"/>
+          <circle cx="24" cy="14" r="8"/>
+          <path d="M8 40 L8 36 M40 40 L40 36"/>
+        </svg>
+        <span class="tag service-detail__tag">Relations</span>
+      </div>
+      <div class="service-detail__body">
+        <h2 class="service-detail__title">Customer Service &amp; <em>Relations</em></h2>
+        <p class="service-detail__desc">Your online reputation is your most valuable asset. We manage community engagement, respond to reviews, handle DMs, and build the kind of brand relationship that turns first-time guests into your most vocal advocates — all while protecting your reputation across every platform.</p>
+        <div class="service-detail__deliverables">
+          <div class="deliverable">Daily comment &amp; DM management</div>
+          <div class="deliverable">Google &amp; Yelp review responses</div>
+          <div class="deliverable">Crisis communication protocols</div>
+          <div class="deliverable">Community engagement strategy</div>
+          <div class="deliverable">Loyalty program development</div>
+          <div class="deliverable">Email &amp; SMS campaign management</div>
+          <div class="deliverable">Influencer partnership outreach</div>
+          <div class="deliverable">Monthly reputation reports</div>
+        </div>
+        <a href="contact.html" class="btn btn--primary">Get a Quote <span class="btn__arrow"></span></a>
+      </div>
+    </div>
+
+    <!-- 04 Platform Management -->
+    <div class="service-detail reveal">
+      <div class="service-detail__aside">
+        <div class="service-detail__num">04</div>
+        <svg class="service-detail__icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2">
+          <rect x="4" y="4" width="18" height="18" rx="2"/>
+          <rect x="26" y="4" width="18" height="18" rx="2"/>
+          <rect x="4" y="26" width="18" height="18" rx="2"/>
+          <rect x="26" y="26" width="18" height="18" rx="2"/>
+        </svg>
+        <span class="tag service-detail__tag">Platforms</span>
+      </div>
+      <div class="service-detail__body">
+        <h2 class="service-detail__title">Third-Party <em>Platform Management</em></h2>
+        <p class="service-detail__desc">DoorDash, Uber Eats, Grubhub, OpenTable, Yelp — these platforms are revenue channels that most restaurants underutilize. We optimize every listing, manage your menu presentation, strategize your reviews, and maximize your placement in search results so you capture more orders and reservations without more effort on your end.</p>
+        <div class="service-detail__deliverables">
+          <div class="deliverable">DoorDash listing &amp; menu optimization</div>
+          <div class="deliverable">Uber Eats storefront management</div>
+          <div class="deliverable">Grubhub &amp; Caviar setup</div>
+          <div class="deliverable">OpenTable profile management</div>
+          <div class="deliverable">Yelp Elite strategy</div>
+          <div class="deliverable">Google Business Profile optimization</div>
+          <div class="deliverable">Pricing &amp; commission negotiation</div>
+          <div class="deliverable">Platform promotional campaigns</div>
+        </div>
+        <a href="contact.html" class="btn btn--primary">Get a Quote <span class="btn__arrow"></span></a>
+      </div>
+    </div>
+
+    <!-- 05 Paid Ads -->
+    <div class="service-detail reveal">
+      <div class="service-detail__aside">
+        <div class="service-detail__num">05</div>
+        <svg class="service-detail__icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2">
+          <polyline points="4,40 14,24 22,30 32,12 44,6"/>
+          <circle cx="44" cy="6" r="3" fill="currentColor"/>
+          <line x1="4" y1="44" x2="44" y2="44" stroke-width="0.8" opacity="0.4"/>
+          <line x1="4" y1="4" x2="4" y2="44" stroke-width="0.8" opacity="0.4"/>
+        </svg>
+        <span class="tag service-detail__tag">Performance</span>
+      </div>
+      <div class="service-detail__body">
+        <h2 class="service-detail__title">Paid Ads &amp; <em>Performance Marketing</em></h2>
+        <p class="service-detail__desc">We run paid media campaigns that connect your restaurant with the right guests at the right moment — people ready to book, order, and return. Full-funnel strategies across Meta, Google, and TikTok, with transparent weekly reporting and a relentless focus on your cost-per-acquisition and return on ad spend.</p>
+        <div class="service-detail__deliverables">
+          <div class="deliverable">Meta Ads (Instagram &amp; Facebook)</div>
+          <div class="deliverable">Google Search &amp; Display campaigns</div>
+          <div class="deliverable">TikTok Ads management</div>
+          <div class="deliverable">Retargeting &amp; lookalike audiences</div>
+          <div class="deliverable">Ad creative &amp; copywriting</div>
+          <div class="deliverable">A/B testing &amp; optimization</div>
+          <div class="deliverable">Weekly ROAS &amp; KPI reports</div>
+          <div class="deliverable">Conversion tracking setup</div>
+        </div>
+        <a href="contact.html" class="btn btn--primary">Get a Quote <span class="btn__arrow"></span></a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Platforms We Manage -->
+<section class="section" style="background:var(--surface); border-top:1px solid var(--border);">
+  <div class="container">
+    <p class="section-label reveal">Platforms We Manage</p>
+    <h2 class="reveal" style="font-family:var(--font-display); font-size:clamp(1.75rem,3vw,3rem); font-weight:400; line-height:1.05; letter-spacing:-0.02em; margin-bottom:3rem; max-width:520px;">
+      Every Channel. <em style="font-style:italic; color:var(--gold);">Fully Managed.</em>
+    </h2>
+    <div class="platforms-grid reveal">
+      <div class="platform-tile">
+        <div class="platform-tile__icon" style="background:rgba(255,60,0,0.12); color:#FF3C00;">🍔</div>
+        <div class="platform-tile__name">DoorDash</div>
+        <div class="platform-tile__desc">Listing optimization &amp; promotional campaigns</div>
+      </div>
+      <div class="platform-tile">
+        <div class="platform-tile__icon" style="background:rgba(6,185,97,0.12); color:#06B961;">🚗</div>
+        <div class="platform-tile__name">Uber Eats</div>
+        <div class="platform-tile__desc">Menu management &amp; sponsored placements</div>
+      </div>
+      <div class="platform-tile">
+        <div class="platform-tile__icon" style="background:rgba(255,59,48,0.12); color:#FF3B30;">🥡</div>
+        <div class="platform-tile__name">Grubhub</div>
+        <div class="platform-tile__desc">Profile management &amp; order maximization</div>
+      </div>
+      <div class="platform-tile">
+        <div class="platform-tile__icon" style="background:rgba(196,29,66,0.12); color:#C41D42;">🍽️</div>
+        <div class="platform-tile__name">OpenTable</div>
+        <div class="platform-tile__desc">Reservation management &amp; guest data</div>
+      </div>
+      <div class="platform-tile">
+        <div class="platform-tile__icon" style="background:rgba(255,57,28,0.12); color:#FF391C;">⭐</div>
+        <div class="platform-tile__name">Yelp</div>
+        <div class="platform-tile__desc">Review strategy &amp; Elite engagement</div>
+      </div>
+      <div class="platform-tile">
+        <div class="platform-tile__icon" style="background:rgba(66,133,244,0.12); color:#4285F4;">📍</div>
+        <div class="platform-tile__name">Google Business</div>
+        <div class="platform-tile__desc">Local SEO &amp; Maps optimization</div>
+      </div>
+      <div class="platform-tile">
+        <div class="platform-tile__icon" style="background:rgba(225,48,108,0.12); color:#E1306C;">📸</div>
+        <div class="platform-tile__name">Instagram</div>
+        <div class="platform-tile__desc">Content, engagement &amp; paid promotion</div>
+      </div>
+      <div class="platform-tile">
+        <div class="platform-tile__icon" style="background:rgba(24,119,242,0.12); color:#1877F2;">👥</div>
+        <div class="platform-tile__name">Facebook</div>
+        <div class="platform-tile__desc">Community management &amp; Ads</div>
+      </div>
+      <div class="platform-tile">
+        <div class="platform-tile__icon" style="background:rgba(0,0,0,0.3); color:#E8E8E8;">🎵</div>
+        <div class="platform-tile__name">TikTok</div>
+        <div class="platform-tile__desc">Short-form content &amp; TikTok Ads</div>
+      </div>
+      <div class="platform-tile">
+        <div class="platform-tile__icon" style="background:rgba(255,199,0,0.12); color:#FFC700;">🥘</div>
+        <div class="platform-tile__name">Caviar</div>
+        <div class="platform-tile__desc">Premium delivery positioning</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" style="border-top:1px solid var(--border);">
+  <div class="container">
+    <p class="section-label reveal" style="justify-content:center;">Get Started</p>
+    <h2 class="cta-section__title reveal">
+      Ready to Build<br><em>Something Extraordinary?</em>
+    </h2>
+    <p class="cta-section__sub reveal">Tell us about your restaurant or hospitality brand and we'll put together a custom strategy within 48 hours.</p>
+    <div class="cta-section__btns reveal">
+      <a href="contact.html" class="btn btn--primary">Start the Conversation <span class="btn__arrow"></span></a>
+      <a href="success-cases.html" class="btn btn--outline">See Our Results <span class="btn__arrow"></span></a>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__inner">
+      <div>
+        <div class="footer__brand">Another <em>Level</em></div>
+        <p class="footer__tagline">Premium marketing and visual branding for restaurant and hospitality brands across the United States.</p>
+      </div>
+      <div>
+        <div class="footer__col-title">Navigation</div>
+        <ul class="footer__links">
+          <li><a href="services.html">Services</a></li>
+          <li><a href="portfolio.html">Portfolio</a></li>
+          <li><a href="success-cases.html">Success Cases</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer__col-title">Services</div>
+        <ul class="footer__links">
+          <li><a href="services.html">Visual Branding</a></li>
+          <li><a href="services.html">Content Creation</a></li>
+          <li><a href="services.html">Platform Management</a></li>
+          <li><a href="services.html">Paid Ads</a></li>
+          <li><a href="services.html">Customer Relations</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer__col-title">Contact</div>
+        <ul class="footer__links">
+          <li><a href="mailto:hello@anotherlevelagency.com">hello@anotherlevelagency.com</a></li>
+          <li><a href="tel:+13055550100">(305) 555-0100</a></li>
+          <li><a href="https://instagram.com/anotherlevelagency" target="_blank" rel="noopener">Instagram</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span class="footer__copy">© 2025 Another Level Agency. All rights reserved.</span>
+      <div class="footer__social"><a href="https://instagram.com/anotherlevelagency" target="_blank" rel="noopener">Instagram</a></div>
+    </div>
+  </div>
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>

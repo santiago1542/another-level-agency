@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Another Level Agency — Restaurant &amp; Hospitality Marketing</title>
+  <meta name="description" content="Performance marketing and visual branding for restaurant and hospitality brands in the US. We help great food find its audience." />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* ─── Hero ─── */
+    .hero {
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding-bottom: 60px;
+      padding-top: var(--nav-height);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero__bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 70% 60% at 75% 40%, rgba(196,164,106,0.10) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 70% at 10% 90%, rgba(139,90,60,0.07) 0%, transparent 60%),
+        var(--bg);
+    }
+    /* Decorative geometric lines */
+    .hero__bg::before {
+      content: '';
+      position: absolute;
+      top: 18%; right: 8%;
+      width: 320px; height: 320px;
+      border: 1px solid rgba(196,164,106,0.10);
+      border-radius: 50%;
+    }
+    .hero__bg::after {
+      content: '';
+      position: absolute;
+      top: 24%; right: 14%;
+      width: 200px; height: 200px;
+      border: 1px solid rgba(196,164,106,0.07);
+      border-radius: 50%;
+    }
+    .hero__content {
+      position: relative;
+      z-index: 1;
+      max-width: 1320px;
+      margin: 0 auto;
+      padding: 0 48px;
+      width: 100%;
+    }
+    .hero__eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 0.875rem;
+      margin-bottom: 2rem;
+    }
+    .hero__eyebrow-line { width: 2.5rem; height: 1px; background: var(--gold); }
+    .hero__eyebrow-text {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+    .hero__title {
+      font-family: var(--font-display);
+      font-size: clamp(3.5rem, 9vw, 9.5rem);
+      font-weight: 400;
+      line-height: 0.95;
+      letter-spacing: -0.03em;
+      margin-bottom: 2.5rem;
+      max-width: 1000px;
+    }
+    .hero__title em {
+      font-style: italic;
+      font-weight: 300;
+      color: var(--gold);
+    }
+    .hero__footer {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    .hero__ctas { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .hero__scroll {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .hero__scroll-line {
+      width: 40px; height: 1px;
+      background: var(--muted);
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+    @keyframes scrollPulse {
+      0%, 100% { width: 40px; opacity: 1; }
+      50%       { width: 60px; opacity: 0.4; }
+    }
+    .hero__trust {
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+    .hero__trust strong {
+      color: var(--cream);
+      font-weight: 500;
+    }
+
+    /* ─── Services Grid ─── */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+
+    /* ─── Case Study Teaser ─── */
+    .case-teaser {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      border: 1px solid var(--border);
+      overflow: hidden;
+    }
+    .case-teaser__visual {
+      background: linear-gradient(160deg, #150B05 0%, #2E1608 40%, #4A2410 70%, #5C3020 100%);
+      min-height: 480px;
+      position: relative;
+      overflow: hidden;
+    }
+    .case-teaser__visual::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 60% 40%, rgba(196,164,106,0.18) 0%, transparent 65%);
+    }
+    .case-teaser__visual::after {
+      content: '';
+      position: absolute;
+      bottom: 15%; right: 10%;
+      width: 160px; height: 160px;
+      border: 1px solid rgba(196,164,106,0.2);
+      border-radius: 50%;
+    }
+    .case-teaser__visual-label {
+      position: absolute;
+      top: 2rem; left: 2rem;
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+    .case-teaser__body {
+      padding: 4rem 3.5rem;
+      background: var(--surface);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .case-teaser__quote {
+      font-family: var(--font-display);
+      font-size: clamp(1.5rem, 2.5vw, 2.25rem);
+      font-style: italic;
+      font-weight: 300;
+      line-height: 1.35;
+      margin-bottom: 2rem;
+    }
+    .case-teaser__quote em { font-style: normal; color: var(--gold); }
+    .case-teaser__metrics {
+      display: flex;
+      gap: 2.5rem;
+      margin-bottom: 2.5rem;
+      padding-top: 1.75rem;
+      border-top: 1px solid var(--border);
+    }
+    .case-teaser__metric-val {
+      font-family: var(--font-display);
+      font-size: 2.5rem;
+      font-weight: 500;
+      color: var(--gold);
+      line-height: 1;
+    }
+    .case-teaser__metric-lbl {
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin-top: 0.3rem;
+    }
+
+    /* ─── Approach ─── */
+    .approach-header {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: end;
+      margin-bottom: 3.5rem;
+    }
+    .approach-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.25rem, 4vw, 4rem);
+      font-weight: 400;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+    }
+    .approach-title em { font-style: italic; color: var(--gold); }
+    .approach-sub { font-size: 0.9375rem; color: var(--muted); line-height: 1.75; }
+
+    /* ─── Testimonials Grid ─── */
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+    }
+
+    /* ─── Responsive ─── */
+    @media (max-width: 1024px) {
+      .case-teaser { grid-template-columns: 1fr; }
+      .case-teaser__visual { min-height: 300px; }
+      .approach-header { grid-template-columns: 1fr; gap: 1.5rem; }
+      .testimonials-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 768px) {
+      .hero__content { padding: 0 20px; }
+      .services-grid { grid-template-columns: 1fr; }
+      .testimonials-grid { grid-template-columns: 1fr; }
+      .hero__scroll { display: none; }
+      .case-teaser__body { padding: 2.5rem 1.75rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ─── Navigation ─── -->
+<nav class="nav">
+  <div class="nav__inner">
+    <a href="index.html" class="nav__logo">Another <em>Level</em></a>
+    <ul class="nav__links">
+      <li><a href="services.html">Services</a></li>
+      <li><a href="portfolio.html">Portfolio</a></li>
+      <li><a href="success-cases.html">Success Cases</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <a href="contact.html" class="nav__cta">Book a Call <span style="margin-left:0.25rem">→</span></a>
+    <button class="nav__toggle" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ─── Mobile Nav ─── -->
+<div class="mobile-nav">
+  <a href="index.html">Home</a>
+  <a href="services.html">Services</a>
+  <a href="portfolio.html">Portfolio</a>
+  <a href="success-cases.html">Success Cases</a>
+  <a href="contact.html">Contact</a>
+  <a href="contact.html" class="mobile-nav__cta btn">Book a Call</a>
+</div>
+
+<!-- ─── Hero ─── -->
+<section class="hero">
+  <div class="hero__bg"></div>
+  <div class="hero__content">
+    <div class="hero__eyebrow">
+      <span class="hero__eyebrow-line"></span>
+      <span class="hero__eyebrow-text">Restaurant &amp; Hospitality Marketing</span>
+    </div>
+    <h1 class="hero__title">
+      We Make<br>
+      <em>Restaurants</em><br>
+      Unforgettable.
+    </h1>
+    <div class="hero__footer">
+      <div>
+        <div class="hero__ctas">
+          <a href="contact.html" class="btn btn--primary">
+            Start Your Journey
+            <span class="btn__arrow"></span>
+          </a>
+          <a href="portfolio.html" class="btn btn--outline">
+            View Our Work
+            <span class="btn__arrow"></span>
+          </a>
+        </div>
+        <p class="hero__trust" style="margin-top:1.5rem;">
+          Trusted by <strong>150+ hospitality brands</strong> across the US
+        </p>
+      </div>
+      <div class="hero__scroll">
+        <span class="hero__scroll-line"></span>
+        Scroll to explore
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Marquee ─── -->
+<div class="marquee-wrapper">
+  <div class="marquee-track">
+    <span class="marquee-item">Fine Dining</span>
+    <span class="marquee-item">Casual Restaurants</span>
+    <span class="marquee-item">Boutique Hotels</span>
+    <span class="marquee-item">Cafes &amp; Bakeries</span>
+    <span class="marquee-item">Rooftop Bars</span>
+    <span class="marquee-item">Ghost Kitchens</span>
+    <span class="marquee-item">Resorts</span>
+    <span class="marquee-item">Food Trucks</span>
+    <span class="marquee-item">Fine Dining</span>
+    <span class="marquee-item">Casual Restaurants</span>
+    <span class="marquee-item">Boutique Hotels</span>
+    <span class="marquee-item">Cafes &amp; Bakeries</span>
+    <span class="marquee-item">Rooftop Bars</span>
+    <span class="marquee-item">Ghost Kitchens</span>
+    <span class="marquee-item">Resorts</span>
+    <span class="marquee-item">Food Trucks</span>
+  </div>
+</div>
+
+<!-- ─── Stats ─── -->
+<section class="section--sm">
+  <div class="container">
+    <div class="stats-grid reveal">
+      <div class="stat-item">
+        <div class="stat-item__number">
+          <span data-counter data-target="6" data-suffix="+">6+</span>
+        </div>
+        <div class="stat-item__label">Years in Hospitality Marketing</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-item__number">
+          <span data-counter data-target="150" data-suffix="+">150+</span>
+        </div>
+        <div class="stat-item__label">Restaurant &amp; Hospitality Clients</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-item__number">
+          <span data-counter data-target="4.2" data-suffix="M+" data-decimals="1">4.2M+</span>
+        </div>
+        <div class="stat-item__label">Monthly Reach Generated</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-item__number">
+          <span data-counter data-target="3.8" data-suffix="x" data-decimals="1">3.8x</span>
+        </div>
+        <div class="stat-item__label">Average Return on Ad Spend</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Services ─── -->
+<section class="section">
+  <div class="container">
+    <div style="display:flex; align-items:flex-end; justify-content:space-between; margin-bottom:3rem; gap:2rem; flex-wrap:wrap;">
+      <div>
+        <p class="section-label reveal">What We Do</p>
+        <h2 class="reveal" style="font-family:var(--font-display); font-size:clamp(2rem,4vw,4rem); font-weight:400; line-height:1.05; letter-spacing:-0.02em; max-width:520px;">
+          Full-Spectrum Marketing <em style="font-style:italic; color:var(--gold);">for Hospitality</em>
+        </h2>
+      </div>
+      <a href="services.html" class="btn btn--outline reveal">
+        All Services
+        <span class="btn__arrow"></span>
+      </a>
+    </div>
+
+    <div class="services-grid">
+      <!-- Card 1 -->
+      <div class="service-card reveal">
+        <div class="service-card__num">01</div>
+        <svg class="service-card__icon" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.2">
+          <polygon points="22,4 40,14 40,30 22,40 4,30 4,14" />
+          <polygon points="22,11 33,17 33,27 22,33 11,27 11,17" opacity="0.4"/>
+        </svg>
+        <h3 class="service-card__title">Visual Brand Identity</h3>
+        <p class="service-card__desc">We craft visual identities that communicate the soul of your restaurant before a guest ever walks in. Logo systems, color palettes, typography, and brand guidelines built for longevity.</p>
+        <a href="services.html" class="service-card__link">Learn More →</a>
+      </div>
+      <!-- Card 2 -->
+      <div class="service-card reveal reveal-delay-1">
+        <div class="service-card__num">02</div>
+        <svg class="service-card__icon" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.2">
+          <rect x="4" y="8" width="36" height="28" rx="2"/>
+          <circle cx="22" cy="22" r="7"/>
+          <circle cx="34" cy="12" r="3"/>
+        </svg>
+        <h3 class="service-card__title">High-End Content Creation</h3>
+        <p class="service-card__desc">Editorial photography direction, video reels, and copy that capture the ambiance, plating, and story of your brand — content that performs across every platform.</p>
+        <a href="services.html" class="service-card__link">Learn More →</a>
+      </div>
+      <!-- Card 3 -->
+      <div class="service-card reveal reveal-delay-2">
+        <div class="service-card__num">03</div>
+        <svg class="service-card__icon" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.2">
+          <circle cx="12" cy="12" r="5"/>
+          <circle cx="32" cy="12" r="5"/>
+          <circle cx="12" cy="32" r="5"/>
+          <circle cx="32" cy="32" r="5"/>
+          <circle cx="22" cy="22" r="5"/>
+          <line x1="17" y1="12" x2="27" y2="12"/>
+          <line x1="12" y1="17" x2="12" y2="27"/>
+          <line x1="32" y1="17" x2="32" y2="27"/>
+          <line x1="17" y1="32" x2="27" y2="32"/>
+        </svg>
+        <h3 class="service-card__title">Platform Management</h3>
+        <p class="service-card__desc">Full management of DoorDash, Uber Eats, Yelp, OpenTable, and more — menu optimization, review strategy, and listing management to maximize your digital revenue.</p>
+        <a href="services.html" class="service-card__link">Learn More →</a>
+      </div>
+      <!-- Card 4 -->
+      <div class="service-card reveal reveal-delay-3">
+        <div class="service-card__num">04</div>
+        <svg class="service-card__icon" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.2">
+          <polyline points="4,36 14,22 22,28 32,12 40,8"/>
+          <circle cx="40" cy="8" r="3"/>
+          <line x1="4" y1="40" x2="40" y2="40" stroke-width="0.8" opacity="0.4"/>
+        </svg>
+        <h3 class="service-card__title">Paid Ads &amp; Performance</h3>
+        <p class="service-card__desc">Meta, Google, and TikTok campaigns engineered for restaurant goals — reservations, delivery orders, catering inquiries. Transparent reporting. Measurable ROAS.</p>
+        <a href="services.html" class="service-card__link">Learn More →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Featured Case Study ─── -->
+<section class="section">
+  <div class="container">
+    <p class="section-label reveal">Featured Work</p>
+    <div class="case-teaser reveal">
+      <div class="case-teaser__visual">
+        <span class="case-teaser__visual-label">El Fuego — Miami, FL</span>
+      </div>
+      <div class="case-teaser__body">
+        <p class="section-label" style="margin-bottom:1.25rem;">Success Case</p>
+        <p class="case-teaser__quote">
+          "In 90 days we went from invisible on DoorDash to <em>the #1 Latin restaurant</em> in our zip code."
+        </p>
+        <div class="case-teaser__metrics">
+          <div>
+            <div class="case-teaser__metric-val">4.1x</div>
+            <div class="case-teaser__metric-lbl">ROAS on Meta Ads</div>
+          </div>
+          <div>
+            <div class="case-teaser__metric-val">+218%</div>
+            <div class="case-teaser__metric-lbl">Delivery Orders (90 days)</div>
+          </div>
+          <div>
+            <div class="case-teaser__metric-val">62K</div>
+            <div class="case-teaser__metric-lbl">New Followers</div>
+          </div>
+        </div>
+        <a href="success-cases.html" class="btn btn--primary">
+          Read Case Study
+          <span class="btn__arrow"></span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Approach ─── -->
+<section class="section" style="background:var(--surface); border-top:1px solid var(--border); border-bottom:1px solid var(--border);">
+  <div class="container">
+    <div class="approach-header">
+      <div>
+        <p class="section-label reveal">How We Work</p>
+        <h2 class="approach-title reveal">
+          A Process Built<br>for <em>Results</em>
+        </h2>
+      </div>
+      <p class="approach-sub reveal">We don't do cookie-cutter campaigns. Every strategy starts with understanding what makes your restaurant worth talking about — then we make sure everyone hears it.</p>
+    </div>
+
+    <div>
+      <div class="process-step reveal">
+        <div class="process-step__num">01</div>
+        <div>
+          <h3 class="process-step__title">Audit &amp; Strategy</h3>
+          <p class="process-step__desc">We start with a full audit of your current digital presence — social, listings, reviews, ads — to identify gaps and build a roadmap tailored to your growth goals.</p>
+        </div>
+      </div>
+      <div class="process-step reveal reveal-delay-1">
+        <div class="process-step__num">02</div>
+        <div>
+          <h3 class="process-step__title">Brand &amp; Content Build</h3>
+          <p class="process-step__desc">Visual identity refinement, content calendars, and a photographic direction that captures the atmosphere and quality of your establishment in every frame.</p>
+        </div>
+      </div>
+      <div class="process-step reveal reveal-delay-2">
+        <div class="process-step__num">03</div>
+        <div>
+          <h3 class="process-step__title">Launch &amp; Manage</h3>
+          <p class="process-step__desc">We go live across platforms simultaneously — social channels, delivery apps, paid media — with daily management and community engagement to build real momentum.</p>
+        </div>
+      </div>
+      <div class="process-step reveal reveal-delay-3">
+        <div class="process-step__num">04</div>
+        <div>
+          <h3 class="process-step__title">Scale &amp; Optimize</h3>
+          <p class="process-step__desc">Weekly performance reviews, A/B testing, and continual iteration based on real data — not guesswork — to compound your returns month over month.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Testimonials ─── -->
+<section class="section">
+  <div class="container">
+    <p class="section-label reveal">Client Voices</p>
+    <h2 class="reveal" style="font-family:var(--font-display); font-size:clamp(2rem,3.5vw,3.5rem); font-weight:400; line-height:1.05; letter-spacing:-0.02em; margin-bottom:3rem; max-width:600px;">
+      What Our Clients <em style="font-style:italic; color:var(--gold);">Say</em>
+    </h2>
+    <div class="testimonials-grid">
+      <div class="testimonial-card reveal">
+        <p class="testimonial-card__body">They understood the vibe of our restaurant from day one. Our Instagram went from 800 to 38,000 followers in four months — and those followers actually show up to eat.</p>
+        <div class="testimonial-card__author">Maria Gonzalez</div>
+        <div class="testimonial-card__role">Owner, La Palma Kitchen — Austin, TX</div>
+      </div>
+      <div class="testimonial-card reveal reveal-delay-1">
+        <p class="testimonial-card__body">Our DoorDash revenue tripled in the first two months. The menu photography alone changed everything. Professional, strategic, and they actually care about your success.</p>
+        <div class="testimonial-card__author">James Okafor</div>
+        <div class="testimonial-card__role">GM, The Ember Room — Chicago, IL</div>
+      </div>
+      <div class="testimonial-card reveal reveal-delay-2">
+        <p class="testimonial-card__body">The rebrand they did for us was beyond expectations. We finally look like the luxury resort we are. Bookings from Instagram went up 180% in the first quarter.</p>
+        <div class="testimonial-card__author">Sofia Reyes</div>
+        <div class="testimonial-card__role">Director of Marketing, Casa Blu Resort — Miami, FL</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CTA ─── -->
+<section class="cta-section" style="border-top:1px solid var(--border);">
+  <div class="container">
+    <p class="section-label reveal" style="justify-content:center;">Ready to Grow?</p>
+    <h2 class="cta-section__title reveal">
+      Let's Take Your Brand<br>
+      to <em>Another Level</em>
+    </h2>
+    <p class="cta-section__sub reveal">Schedule a free strategy call and we'll show you exactly what's possible for your restaurant or hospitality brand in 90 days.</p>
+    <div class="cta-section__btns reveal">
+      <a href="contact.html" class="btn btn--primary">
+        Book Your Free Call
+        <span class="btn__arrow"></span>
+      </a>
+      <a href="success-cases.html" class="btn btn--outline">
+        See Results First
+        <span class="btn__arrow"></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Footer ─── -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__inner">
+      <div>
+        <div class="footer__brand">Another <em>Level</em></div>
+        <p class="footer__tagline">Premium marketing and visual branding for restaurant and hospitality brands across the United States.</p>
+      </div>
+      <div>
+        <div class="footer__col-title">Navigation</div>
+        <ul class="footer__links">
+          <li><a href="services.html">Services</a></li>
+          <li><a href="portfolio.html">Portfolio</a></li>
+          <li><a href="success-cases.html">Success Cases</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer__col-title">Services</div>
+        <ul class="footer__links">
+          <li><a href="services.html">Visual Branding</a></li>
+          <li><a href="services.html">Content Creation</a></li>
+          <li><a href="services.html">Platform Management</a></li>
+          <li><a href="services.html">Paid Ads</a></li>
+          <li><a href="services.html">Customer Relations</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer__col-title">Contact</div>
+        <ul class="footer__links">
+          <li><a href="mailto:hello@anotherlevelagency.com">hello@anotherlevelagency.com</a></li>
+          <li><a href="tel:+13055550100">(305) 555-0100</a></li>
+          <li><a href="https://instagram.com/anotherlevelagency" target="_blank" rel="noopener">Instagram</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span class="footer__copy">© 2025 Another Level Agency. All rights reserved.</span>
+      <div class="footer__social">
+        <a href="https://instagram.com/anotherlevelagency" target="_blank" rel="noopener">Instagram</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>

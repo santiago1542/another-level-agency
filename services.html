@@ -113,6 +113,55 @@
       line-height: 1.5;
     }
 
+    /* ─── Work Showcase ─── */
+    .service-showcase {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 2.5rem;
+      background: var(--elevated);
+      border: 1px solid var(--border-accent);
+      border-radius: 4px;
+      padding: 2rem 2.5rem;
+      margin-bottom: 2.5rem;
+      align-items: center;
+    }
+    .service-showcase__img {
+      width: 100%;
+      max-height: 280px;
+      object-fit: contain;
+      display: block;
+      border-radius: 2px;
+    }
+    .service-showcase__client {
+      font-family: var(--font-display);
+      font-size: 1.375rem;
+      font-weight: 400;
+      color: var(--cream);
+      margin: 0.75rem 0 0.875rem;
+      letter-spacing: -0.01em;
+    }
+    .service-showcase__copy {
+      font-size: 0.875rem;
+      color: var(--muted);
+      line-height: 1.75;
+      max-width: 520px;
+      margin-bottom: 1.25rem;
+    }
+    .service-showcase__pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .service-showcase__pills span {
+      font-size: 0.68rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--gold);
+      border: 1px solid var(--border-accent);
+      padding: 0.3rem 0.75rem;
+      border-radius: 2px;
+    }
+
     /* ─── Responsive ─── */
     @media (max-width: 1024px) {
       .service-detail { grid-template-columns: 1fr; gap: 2rem; }
@@ -122,6 +171,8 @@
     @media (max-width: 768px) {
       .service-detail__deliverables { grid-template-columns: 1fr; }
       .platforms-grid { grid-template-columns: repeat(2, 1fr); }
+      .service-showcase { grid-template-columns: 1fr; }
+      .service-showcase__img { max-height: 220px; }
     }
     @media (max-width: 480px) {
       .platforms-grid { grid-template-columns: 1fr 1fr; }
@@ -183,6 +234,23 @@
       <div class="service-detail__body">
         <h2 class="service-detail__title">Visual Brand <em>Identity</em></h2>
         <p class="service-detail__desc">Your restaurant's visual identity is the silent ambassador that speaks before your food does. We build cohesive, compelling brand systems that command premium perception — from your logo to your menu to your social feed — ensuring every visual touchpoint communicates exactly the experience you deliver.</p>
+
+        <!-- Featured Work: Bossa Beer -->
+        <div class="service-showcase">
+          <img class="service-showcase__img" src="images/processed-91CB4C2D-AEC9-47E9-AA12-DE6696C1B0EB.jpeg" alt="Bossa Beer — brand identity developed by Another Level Agency" />
+          <div class="service-showcase__info">
+            <span class="tag">Featured Work</span>
+            <div class="service-showcase__client">Bossa Nova — Bossa Beer</div>
+            <p class="service-showcase__copy">Developed end-to-end around the brand's DNA. From tone of voice and cultural narrative to product naming and packaging design — every detail reflects Bossa Nova's Brazilian roots and the premium experience they deliver. Brand identity that doesn't just look good, it means something.</p>
+            <div class="service-showcase__pills">
+              <span>Brand Identity</span>
+              <span>Tone &amp; Voice</span>
+              <span>Cultural Relevance</span>
+              <span>Packaging Design</span>
+            </div>
+          </div>
+        </div>
+
         <div class="service-detail__deliverables">
           <div class="deliverable">Logo design &amp; brand mark system</div>
           <div class="deliverable">Color palette &amp; typography guide</div>

@@ -123,38 +123,39 @@
       border: 1px solid var(--border);
     }
 
-    /* ─── Content Card Visual Preview ─── */
-    .service-card--visual {
-      padding: 0;
-    }
-    .service-card--visual .service-card__preview {
+    /* ─── Content Showcase Strip ─── */
+    .content-strip {
+      margin-top: 1px;
+      border: 1px solid var(--border);
+      border-top: none;
       position: relative;
       overflow: hidden;
-      height: 210px;
+      height: 340px;
     }
-    .service-card--visual .service-card__preview img {
+    .content-strip img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      object-position: center top;
+      object-position: center 30%;
       display: block;
-      transition: transform 0.6s var(--ease-expo);
+      transition: transform 0.8s var(--ease-expo);
     }
-    .service-card--visual:hover .service-card__preview img { transform: scale(1.04); }
-    .service-card--visual .service-card__preview-tag {
+    .content-strip:hover img { transform: scale(1.03); }
+    .content-strip__label {
       position: absolute;
-      bottom: 0.75rem;
-      left: 0.875rem;
-      font-size: 0.62rem;
+      bottom: 1.5rem;
+      left: 2rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .content-strip__label .tag { margin-bottom: 0; }
+    .content-strip__client {
+      font-size: 0.72rem;
       font-weight: 500;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: var(--gold);
-      background: rgba(7,6,10,0.72);
-      padding: 0.25rem 0.625rem;
-    }
-    .service-card--visual .service-card__inner {
-      padding: 2.75rem 2.5rem;
+      color: rgba(235,225,210,0.6);
     }
 
     /* ─── Case Study Teaser ─── */
@@ -420,22 +421,16 @@
         <a href="services.html" class="service-card__link">Learn More →</a>
       </div>
       <!-- Card 2 -->
-      <div class="service-card service-card--visual reveal reveal-delay-1">
-        <div class="service-card__preview">
-          <img src="images/Bossa%20Grid%203x4.jpg" alt="Bossa Nova Instagram content grid — produced by Another Level Agency" />
-          <span class="service-card__preview-tag">Bossa Nova · Content in the Wild</span>
-        </div>
-        <div class="service-card__inner">
-          <div class="service-card__num">02</div>
-          <svg class="service-card__icon" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.2">
-            <rect x="4" y="8" width="36" height="28" rx="2"/>
-            <circle cx="22" cy="22" r="7"/>
-            <circle cx="34" cy="12" r="3"/>
-          </svg>
-          <h3 class="service-card__title">High-End Content Creation</h3>
-          <p class="service-card__desc">Editorial photography direction, video reels, and copy that capture the ambiance, plating, and story of your brand — content that performs across every platform.</p>
-          <a href="services.html" class="service-card__link">Learn More →</a>
-        </div>
+      <div class="service-card reveal reveal-delay-1">
+        <div class="service-card__num">02</div>
+        <svg class="service-card__icon" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.2">
+          <rect x="4" y="8" width="36" height="28" rx="2"/>
+          <circle cx="22" cy="22" r="7"/>
+          <circle cx="34" cy="12" r="3"/>
+        </svg>
+        <h3 class="service-card__title">High-End Content Creation</h3>
+        <p class="service-card__desc">Editorial photography direction, video reels, and copy that capture the ambiance, plating, and story of your brand — content that performs across every platform.</p>
+        <a href="services.html" class="service-card__link">Learn More →</a>
       </div>
       <!-- Card 3 -->
       <div class="service-card reveal reveal-delay-2">
@@ -466,6 +461,15 @@
         <h3 class="service-card__title">Paid Ads &amp; Performance</h3>
         <p class="service-card__desc">Meta, Google, and TikTok campaigns engineered for restaurant goals — reservations, delivery orders, catering inquiries. Transparent reporting. Measurable ROAS.</p>
         <a href="services.html" class="service-card__link">Learn More →</a>
+      </div>
+    </div>
+
+    <!-- Content in the Wild -->
+    <div class="content-strip reveal">
+      <img src="images/Bossa%20Grid%203x4.jpg" alt="Bossa Nova Instagram content grid — produced by Another Level Agency" />
+      <div class="content-strip__label">
+        <span class="tag">Content Creation</span>
+        <span class="content-strip__client">Bossa Nova · Content in the Wild</span>
       </div>
     </div>
   </div>
